@@ -17,7 +17,7 @@ const getInitialDarkMode = () => {
 //at initail mount the value is true then the value is false so we should use useffect
 export const AppProvider = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(getInitialDarkMode());
-  const [searchTerm, setsearchTerm] = useState('office');
+  const [searchTerm, setsearchTerm] = useState('cat');
   const toggleDarkTheme = () => {
     const newDarkTheme = !isDarkTheme;
     setIsDarkTheme(newDarkTheme);
