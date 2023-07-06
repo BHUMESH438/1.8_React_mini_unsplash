@@ -1,14 +1,11 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const AppContext = createContext();
-//returns boolean true if dark
 const getInitialDarkMode = () => {
   const prefersDarkMode = window.matchMedia('(prefers-color-scheme:dark)').matches;
   const storeDarkmode = localStorage.getItem('darkTheme');
   console.log('pppere', prefersDarkMode);
   console.log('storedark', storeDarkmode);
-  //you can use return storeDarkmode||prefersDarkMode also
-  /* I think that in this case the problem is in the logical OR operator ( || ) , because it will always return true, and we need that in the case that storedDarkMode is false getInitialDarkMode() returns false too, but it will return true. So I changed that part of the code so that when storedDarkMode is not null, it returns storedDarkMode regardless of whether it is true or false. And it worked for me.*/
   if (storeDarkmode === null) {
     return prefersDarkMode;
   }

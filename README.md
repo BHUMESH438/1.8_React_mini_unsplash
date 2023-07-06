@@ -31,6 +31,15 @@ const toggleDarkTheme = () => {
 
 In the toggleDarkTheme add logic to add and remove .dark-theme class to body element based on isDarkTheme value.
 
+```js
+const toggleDarkTheme = () => {
+  const newDarkTheme = !isDarkTheme;
+  setisDarkTheme(newDarkTheme);
+  const body = document.querySelector('body');
+  body.classList.toggle('dark-theme', newDarkTheme); //clss list is read only and toggle fn is inbuilt for toggling
+};
+```
+
 #### Dark Theme - CSS
 
 Create CSS variables for the background color and text color for both dark mode and normal mode, as well as a CSS variable for the dark mode transition.
@@ -161,6 +170,24 @@ To provide a better user experience, you can check whether the user prefers dark
 #### Setup Local Storage to Store isDarkTheme State Value
 
 To persist the user's preferred theme across sessions, you can store the isDarkTheme state value in local storage. This will allow the theme to be preserved even if the user closes and reopens the application.
+
+```js
+//returns boolean true if dark
+const getInitialDarkMode = () => {
+  const prefersDarkMode = window.matchMedia('(prefers-color-scheme:dark)').matches;
+  const storeDarkmode = localStorage.getItem('darkTheme');
+  console.log('pppere', prefersDarkMode);
+  console.log('storedark', storeDarkmode);
+  //you can use return storeDarkmode||prefersDarkMode also
+  /* I think that in this case the problem is in the logical OR operator ( || ) , because it will always return true, and we need that in the case that storedDarkMode is false getInitialDarkMode() returns false too, but it will return true. So I changed that part of the code so that when storedDarkMode is not null, it returns storedDarkMode regardless of whether it is true or false. And it worked for me.*/
+  if (storeDarkmode === null) {
+    return prefersDarkMode;
+  }
+  if (storeDarkmode !== null) {
+    return storeDarkmode === 'true';
+  }
+};
+```
 
 #### Setup ENV Variables in VITE
 
